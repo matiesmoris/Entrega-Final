@@ -1,0 +1,23 @@
+{% extends "SocialTravel/base.html" %}
+
+{% block main %}
+<h1>Registro de usuarios</h1>
+<!--<form method="POST">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" value="Registrarme">
+</form>
+Formulario tradicional, el formulario de abajo se usa para sacar los comentarios que vienen por defecto (cantidad de caracteres, etc)
+-->
+
+<form method="POST">
+{% csrf_token %}
+{% for field in form %}
+    <p class="fieldWrapper">
+        {{ field.errors }} <!-- esto te tira los errores si la pass es corta, solo numeros, etc-->
+        {{ field.label_tag }} {{ field }}
+    </p>
+{% endfor %}
+<input type="submit" value="Registrarme">
+</form>
+{% endblock %}

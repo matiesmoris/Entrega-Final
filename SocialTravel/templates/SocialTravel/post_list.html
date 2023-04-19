@@ -1,0 +1,26 @@
+{% extends "SocialTravel/base.html" %}
+
+{% block main %}
+
+<ul>
+    <h1>Lista de Posts</h1>
+    {% if not object_list %}
+        <h2>NO HAY POSTS</h2>
+    {% endif %}
+    {% for post in object_list %}
+    <li>
+        {{post.publisher}}
+        <!--{{post.publisher}} para ver el usuario-->
+        <!--{{user}} para ver el usuario-->
+        <!--{{post.publisher.id}} para ver el id-->
+        <!--{{user.id}} para ver el id-->
+        {{post}}
+        <a href="{% url 'post-detail' post.id %}">Detalle</a>
+        {% if user.is_authenticated and post.publisher == user %} <!--solo te deja ver esto si el usuario esta logueado y si es el dueño del post-->
+            <a href="{% url 'post-update' post.id %}">Actualizar</a>
+            <a href="{% url 'post-delete' post.id %}">Borrar</a>
+        {% endif %}
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
